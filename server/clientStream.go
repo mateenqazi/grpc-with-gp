@@ -15,9 +15,11 @@ func (s *helloServer) SayHelloClientStreaming(stream proto.GreetService_SayHello
 		if err == io.EOF {
 			return stream.SendAndClose(&proto.MessageList{Messages: messages})
 		}
+
 		if err != nil {
 			return err
 		}
+
 		log.Printf("Got request with name : %v", req.Name)
 		messages = append(messages, "Hello "+req.Name)
 	}
