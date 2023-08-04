@@ -1,0 +1,35 @@
+syntax="proto3";
+
+option go_package = "github.com/mateenqazi/grpc-with-go/proto";
+
+package greet_service;
+
+
+
+service GreetService {
+    rpc SayHello(NoParam) returns (HelloResponse);
+
+    rpc SayHelloServerStreaming(NamesList) returns (stream HelloResponse);
+
+    rpc SayHelloClientStreaming(stream HelloRequest) returns (MessageList);
+
+    rpc SayHelloBidirectionStreaming(stream HelloRequest) returns (stream HelloResponse);
+}
+
+message NoParam{}
+
+message HelloRequest{
+    string name = 1;
+} 
+
+message HelloResponse{
+    string name = 1;
+}
+
+message NamesList{
+    repeated string names = 1;
+}
+
+message MessageList{
+    repeated string messages = 1;
+}
